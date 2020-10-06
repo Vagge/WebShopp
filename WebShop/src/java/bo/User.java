@@ -16,7 +16,7 @@ public class User
     private final String username;
     private final String password;
     
-    protected User(String username, String password)
+    public User(String username, String password)
     {
         this.password = password;
         this.username = username;

@@ -27,14 +27,4 @@ public class ItemHandler
         }
         return items;
     }
-    
-    public static void main(String[] args)
-    {
-        List<ItemInfo> a = ItemHandler.getItemsWithSearchFor("");
-        System.out.println(a.size());
-        for (int i = 0; i < a.size(); i++) 
-        {
-            System.out.println(a.get(i).getName());
-        }
-    }
 }

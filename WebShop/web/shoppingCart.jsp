@@ -16,14 +16,35 @@
         <ul>
             <li><a href="shop.jsp">Home</a></li>
             <li><a href="shoppingCart.jsp">Shopping Cart</a></li>
-            <li><a href="loggedOut.jsp">Logout</a></li>
+            <li><a href="myOrders.jsp">My Orders</a></li>
+            <li><a href="loggedOut.jsp">Logout</a></li>         
         </ul>
         <table style='width: 60%' id="searchTable">
                 
         </table>
-        
+        <form class="search" action="">
+            <input type="button" onclick="placeOrder(this.form)" class="searchBt" value="Order">  
+        </form>
         <script>
             viewCart();
+            
+            function placeOrder(form)
+            {
+                xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "shoppingCart?placeOrder", true);
+                xhttp.onload = function()
+                {
+                    if (xhttp.status == 200)
+                    {
+                        document.getElementById("searchTable").innerHTML = "Items Ordered!";
+                    }
+                    else
+                    {
+                        document.getElementById("errorMsg").value = xhttp2.statusText;
+                    }
+                }
+                xhttp.send();
+            }
             
             function viewCart()
             {

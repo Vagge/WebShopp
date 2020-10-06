@@ -5,6 +5,7 @@
  */
 package ui;
 
+import bo.OrderHandler;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,10 +46,50 @@ public class shoppingCart extends HttpServlet {
             {
                 removeItem(request, response);
             }
+            else if(request.getParameter("placeOrder")!=null)
+            {
+                placeOrder(request, response);
+            }
+    }
+    
+    
+    private void placeOrder(HttpServletRequest request, HttpServletResponse response) //loads items from session to cart
+            throws ServletException, IOException
+    {
+         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = null;
+        try
+        {     
+            HttpSession session = request.getSession();
+            out = response.getWriter();
+            
+            if(session.getAttribute("items")!=null)
+            {        
+                
+                String[] items = ((String)session.getAttribute("items")).split("newItem");
+                
+                ArrayList<String> list = new ArrayList<>();
+                for (int i = 0; i < items.length; i++) 
+                {
+                    list.add(items[i]);
+                }
+                OrderHandler.placeOrder(list, (String) session.getAttribute("username"), 1);
+                session.removeAttribute("items");
+            } 
+        }
+        catch (IOException ex) {
+            Logger.getLogger(shoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        finally
+        {
+            if(out!=null)
+            {
+                out.close();
+            }
+        }
     }
     
     private void viewCart(HttpServletRequest request, HttpServletResponse response) //loads items from session to cart
-            throws ServletException, IOException
     {
         response.setContentType("application/json");
         PrintWriter out = null;
@@ -79,7 +120,9 @@ public class shoppingCart extends HttpServlet {
                 out.println(json);
             } 
         }
-        finally
+        catch (IOException ex) {
+            Logger.getLogger(shoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        }        finally
         {
             if(out!=null)
             {

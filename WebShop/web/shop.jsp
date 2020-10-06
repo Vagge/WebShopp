@@ -15,7 +15,8 @@
         <ul>
             <li><a href="shop.jsp">Home</a></li>
             <li><a href="shoppingCart.jsp">Shopping Cart</a></li>
-            <li><a href="loggedOut.jsp">Logout</a></li>
+            <li><a href="myOrders.jsp">My Orders</a></li>
+            <li><a href="loggedOut.jsp">Logout</a></li>  
         </ul>
         <a href="shop.jsp"></a>
         <form class="search" action="">

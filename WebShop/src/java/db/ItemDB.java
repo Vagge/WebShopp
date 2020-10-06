@@ -33,7 +33,7 @@ public class ItemDB extends bo.Item
                 String name = rs.getString("name");
                 String desc = rs.getString("desc");
                 int nrOfItems = rs.getInt("nrOfItems");
-                items.add(new ItemDB(id, name, desc, nrOfItems));
+                items.add(new ItemDB(id, name, desc, nrOfItems)); 
             }        
         }
         catch(SQLException ex)
@@ -43,7 +43,7 @@ public class ItemDB extends bo.Item
         return items;
     }
     
-    private ItemDB(int id, String name, String desc, int nrOfItems)
+    ItemDB(int id, String name, String desc, int nrOfItems)
     {
         super(id,name,desc,nrOfItems);
     }
